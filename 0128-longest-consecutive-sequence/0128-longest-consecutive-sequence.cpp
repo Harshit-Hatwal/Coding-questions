@@ -1,38 +1,53 @@
 class Solution {
 public:
-    int longestConsecutive(vector<int>& nums) {
+    int longestConsecutive(vector<int>& arr) {
+        int n = arr.size(); // extract the size of the array
         
-        map<int,bool> present,checked;
-        for(auto a:nums)
+        unordered_map<int, int> mp; // declaring unordered map
+        
+        // Step 1)  we are giving 1 to each of the elemnt
+        // (Assuming that it may be the starting point of consecutive sequence)
+        for(int i = 0; i < n; i++)
         {
-            present[a]=true;
+            mp[arr[i]] = 1;
         }
-        int longestconsecutivechain=0;
         
-        for(auto a:nums)
+        // step 2) validating our assumption taken in step 1
+        for(int i = 0; i < n; i++)
         {
-            if(!checked[a]  && !present[a-1])    // here we are checking whether checked[a] is already explored or not 
-                // and  whether a-1 element is present in the hasmap  or not  if it is present  then a cant be the starting 
-                // element of the sequence . 
-            {   
-                int currentchain=0;
-                int start=a;
-                
-                while(present[start])
-                {
-                    currentchain++;
-                    checked[start]=true;
-                    start++;
-                    
-                }
-                longestconsecutivechain=max(longestconsecutivechain,currentchain);
-                
+            if(mp.find(arr[i] - 1) != mp.end()) // if(arr[i] - 1) is present in map
+            {
+                // then arr[i] can never be the starting point some of consecutive sequence
+                // so give value zero for that arr[i]
+                mp[arr[i]] = 0;
             }
-            
-            
         }
-        return longestconsecutivechain;
         
+        // step 3) Now the elements for which value 1 is left
+        // for them we definately know they are the starting point of 
+        // some consecutive sequence, using that length trick we find the maxlen
         
+        int mxLen = 0; // this variable holds my answer
+        
+        for(int i = 0; i < n; i++) // travel in the array
+        {
+            // if value is 1, then they are starting point some of consecutive sequence
+            if(mp[arr[i]] == 1) 
+            {
+                // if it is the starting point, then definately length is going to be 
+                // atleast 1
+                int length = 1; 
+                
+               // we dicuss it above
+                while(mp.find(arr[i] + length) != mp.end())
+                {
+                    length++;
+                }
+                
+                mxLen = max(mxLen, length); // update mxLen
+            }
+        }
+        
+        return mxLen; // Finally return mxLen
     }
 };
