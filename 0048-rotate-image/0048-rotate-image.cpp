@@ -11,7 +11,7 @@ public:
                 swap(matrix[i][j],matrix[j][i]);
             }
         }
-        // reversing the columns 
+       //we traverse in the row and for each element in the row we swap it with the another element . // shifting the columns last column becomes first column second last column becomes the second column and so on .
     for(int i=row-1;i>=0;i--)
     {
         int low=0,high=row-1;
