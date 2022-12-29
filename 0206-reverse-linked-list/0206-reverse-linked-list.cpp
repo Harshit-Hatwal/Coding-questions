@@ -14,10 +14,10 @@ public:
         
         ListNode *prev=NULL;
         ListNode *curr=head;
-        
+          ListNode *temp=NULL;
         while(curr!=NULL)
         {
-            ListNode *temp=curr->next;  // saving curr->next node pointer 
+             temp=curr->next;  // saving curr->next node pointer 
             curr->next=prev;  // ham  pointer prev assign kr rhe ha in curr->next  isse curr-next and temp ke beech mein link toot jayega .
             prev=curr; // prev ko ek point aage badhaya 
             curr=temp;  // curr ko bhi ek point aage 
