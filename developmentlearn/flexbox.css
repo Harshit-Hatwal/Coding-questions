@@ -1,0 +1,14 @@
+.container
+{
+
+}
+
+.items{
+
+    width:250px;
+    height:150px;
+    border: 1px solid black;
+    margin:10px;
+    background:greenyellow;
+
+}
